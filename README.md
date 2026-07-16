@@ -1,13 +1,30 @@
-# miniature-invention
-Stats SA economic datasets 
 import requests
+import base64
 
-url = "https://githubusercontent.com"
-response = requests.get(url)
+name: Process Public Stats
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *' # Optional: Runs automatically every day at midnight
 
-if response.status_code == 200:
-    stats_data = response.json()  # Use response.text if it is a text file
-    print(stats_data)
-else:
-    print(f"Failed to retrieve file. Status code: {response.status_code}")
+jobs:
+  run-stats-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Stats Script
+        run: python your_script_name.py
+
+
 
