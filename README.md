@@ -1,30 +1,44 @@
-import requests
-import base64
+# miniature-invention
 
-name: Process Public Stats
-on:
-  push:
-    branches: [ main ]
-  schedule:
-    - cron: '0 0 * * *' # Optional: Runs automatically every day at midnight
+Stats SA economic datasets
 
-jobs:
-  run-stats-script:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository code
-        uses: actions/checkout@v4
+A Python project for retrieving and processing South African economic data from Statistics South Africa.
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+## Overview
 
-      - name: Install dependencies
-        run: pip install requests
+This repository contains scripts and workflows to automatically fetch and process economic datasets from Stats SA.
 
-      - name: Run Stats Script
-        run: python your_script_name.py
+## Requirements
 
+- Python 3.10+
+- `requests` library
 
+## Installation
 
+```bash
+pip install requests
+```
+
+## Usage
+
+Run the main script to fetch Stats SA data:
+
+```bash
+python fetch_stats.py
+```
+
+## Automated Processing
+
+This repository includes a GitHub Actions workflow that automatically runs the stats script:
+- **Trigger**: On every push to `main` branch
+- **Schedule**: Optionally runs daily at midnight UTC
+
+See `.github/workflows/process-stats.yml` for workflow configuration.
+
+## License
+
+MIT
+
+## Author
+
+pearlxaba-dot
